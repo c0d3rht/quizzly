@@ -15,25 +15,25 @@ struct Resources {
     static let colors = [
         "option": UIColor.black.withAlphaComponent(0.2),
         "option_disabled": UIColor.black.withAlphaComponent(0.3),
-        "correct": UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1),
-        "incorrect": UIColor(red: 1, green: 59/255, blue: 48/255, alpha: 1),
+        "correct": UIColor(red: 76.0/255.0, green: 217.0/255.0, blue: 100.0/255.0, alpha: 1.0),
+        "incorrect": UIColor(red: 1.0, green: 59.0/255.0, blue: 48.0/255.0, alpha: 1.0),
         "timer": UIColor.white.withAlphaComponent(0.8),
-        "timer_late": UIColor(red: 1, green: 59/255, blue: 48/255, alpha: 1).withAlphaComponent(0.75)
+        "timer_late": UIColor(red: 1, green: 59.0/255.0, blue: 48.0/255.0, alpha: 0.75)
     ]
     
     // The list of colors randomly chosen from, to create a gradient to be set as the background of the view
     static let gradientColors = [
-        UIColor(red: 5/255, green: 223/255, blue: 235/255, alpha: 1),
-        UIColor(red: 10/255, green: 140/255, blue: 189/255, alpha: 1),
-        UIColor(red: 36/255, green: 208/255, blue: 244/255, alpha: 1),
-        UIColor(red: 38/255, green: 99/255, blue: 226/255, alpha: 1),
-        UIColor(red: 75/255, green: 203/255, blue: 170/255, alpha: 1),
-        UIColor(red: 114/255, green: 55/255, blue: 184/255, alpha: 1),
-        UIColor(red: 210/255, green: 111/255, blue: 253/255, alpha: 1),
-        UIColor(red: 246/255, green: 130/255, blue: 19/255, alpha: 1),
-        UIColor(red: 247/255, green: 106/255, blue: 35/255, alpha: 1),
-        UIColor(red: 247/255, green: 185/255, blue: 12/255, alpha: 1),
-        UIColor(red: 254/255, green: 116/255, blue: 178/255, alpha: 1)
+        UIColor(red: 5.0/255.0, green: 223.0/255.0, blue: 235.0/255.0, alpha: 1.0),
+        UIColor(red: 10.0/255.0, green: 140.0/255.0, blue: 189.0/255.0, alpha: 1.0),
+        UIColor(red: 36.0/255.0, green: 208.0/255.0, blue: 244.0/255.0, alpha: 1.0),
+        UIColor(red: 38.0/255.0, green: 99.0/255.0, blue: 226.0/255.0, alpha: 1.0),
+        UIColor(red: 75.0/255.0, green: 203.0/255.0, blue: 170.0/255.0, alpha: 1.0),
+        UIColor(red: 114.0/255.0, green: 55.0/255.0, blue: 184.0/255.0, alpha: 1.0),
+        UIColor(red: 210.0/255.0, green: 111.0/255.0, blue: 253.0/255.0, alpha: 1.0),
+        UIColor(red: 246.0/255.0, green: 130.0/255.0, blue: 19.0/255.0, alpha: 1.0),
+        UIColor(red: 247.0/255.0, green: 106.0/255.0, blue: 35.0/255.0, alpha: 1.0),
+        UIColor(red: 247.0/255.0, green: 185.0/255.0, blue: 12.0/255.0, alpha: 1.0),
+        UIColor(red: 254.0/255.0, green: 116.0/255.0, blue: 178.0/255.0, alpha: 1.0)
     ]
     
     /// Returns the color for the needed use
