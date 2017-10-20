@@ -3,10 +3,6 @@
 //  Quizzly
 //
 
-
-// LAUNCHSCREEN BACKGROUND ===> #DAFBEE
-
-
 import UIKit
 
 class ScoreViewController: UIViewController {

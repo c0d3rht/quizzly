@@ -8,22 +8,21 @@ import AudioToolbox
 
 class ModalViewController: UIViewController {
     
-    var duration: Double!
-    var isAnswerCorrect: Bool!
-    var isAnswerGiven: Bool!
+    var isAnswerCorrect = false
+    var isAnswerGiven = false
     
     @IBOutlet weak var messageLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayModal(for: duration, when: isAnswerCorrect)
+        displayModal(for: 1.0)
     }
     
     /// Displays the "modal" for a mentioned duration
-    func displayModal(for seconds: Double, when result: Bool) {
+    func displayModal(for seconds: Double) {
         if isAnswerCorrect {
             messageLabel.text = "Correct!"
-        } else { 
+        } else {
             if isAnswerGiven {
                 messageLabel.text = "Sorry, that's not it."
             } else {
@@ -31,7 +30,7 @@ class ModalViewController: UIViewController {
             }
         }
 
-        let state = result ? "correct" : "incorrect"
+        let state = isAnswerCorrect ? "correct" : "incorrect"
         
         messageLabel.backgroundColor = Resources.getColor(for: state)
         AudioServicesPlaySystemSound(Resources.getSound(for: state))

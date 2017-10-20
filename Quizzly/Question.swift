@@ -6,9 +6,8 @@
 import GameKit
 
 class Question {
-    
     let title: String
-    private let options: [String]
+    let options: [String]
     let answer: String
     
     init(title: String, _ options: [String], _ answerIndex: Int) {
@@ -18,21 +17,21 @@ class Question {
     }
     
     func getOptions() -> [String] {
-        var modifiedOptions = options
+        var scrambledOptions = options
 
         if GKRandomSource.sharedRandom().nextInt(upperBound: 2) == 0 {
-            var removedOption = ""
+            var removedOption: String
             
             repeat {
                 let randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: options.count - 1)
-                removedOption = modifiedOptions.remove(at: randomIndex)
+                removedOption = scrambledOptions.remove(at: randomIndex)
                 
                 if removedOption == answer {
-                    modifiedOptions.append(removedOption)
+                    scrambledOptions.append(removedOption)
                 }
-            } while removedOption == answer && modifiedOptions.count == options.count
+            } while removedOption == answer && scrambledOptions.count == options.count
         }
         
-        return GKRandomSource.sharedRandom().arrayByShufflingObjects(in: modifiedOptions) as! [String]
+        return GKRandomSource.sharedRandom().arrayByShufflingObjects(in: scrambledOptions) as! [String]
     }
 }

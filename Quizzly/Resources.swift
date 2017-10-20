@@ -36,18 +36,13 @@ struct Resources {
         UIColor(red: 254/255, green: 116/255, blue: 178/255, alpha: 1)
     ]
     
-    static let images = [
-        "play": UIImage(named: "PlayIcon")!,
-        "pause":  UIImage(named: "PauseIcon")!
-    ]
-    
     /// Returns the color for the needed use
     static func getColor(for usage: String) -> UIColor {
         return colors[usage]!
     }
     
     /// Returns a random gradient
-    static func getRandomGradient() -> CAGradientLayer {
+    static func getGradient() -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
         
         repeat {
@@ -67,10 +62,11 @@ struct Resources {
     }
     
     /// Returns an image
-    static func getImage(for icon: String) -> UIImage {
-        return images[icon]!.withRenderingMode(.alwaysTemplate)
+    static func getImage(for iconName: String) -> UIImage {
+        return UIImage(named: "\(iconName)")!.withRenderingMode(.alwaysTemplate)
     }
     
+    /// Returns a sound
     static func getSound(for result: String) -> SystemSoundID {
         var sound: SystemSoundID = 0
         let pathToSoundFile = Bundle.main.path(forResource: result, ofType: "wav")

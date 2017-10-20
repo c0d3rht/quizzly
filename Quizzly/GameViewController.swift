@@ -9,7 +9,6 @@ import GameKit
 class GameViewController: UIViewController {
     
     var game = Game()
-    let modalDuration = 1.0
     
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
@@ -36,7 +35,7 @@ class GameViewController: UIViewController {
         setGradientBackground()
         
         timerLabel.textColor = Resources.getColor(for: "timer")
-        timerLabel.text = "\(Int(Game.secondsPerQuestion))"
+        timerLabel.text = "\(Int(game.secondsPerQuestion))"
         
         game.continue()
         
@@ -57,7 +56,7 @@ class GameViewController: UIViewController {
             (optionsView.subviews[i] as! UIButton).setTitle(game.currentOptions[i], for: .normal)
         }
         
-        game.startTimer(for: Game.secondsPerQuestion, and: updateTimer)
+        game.startTimer(for: game.secondsPerQuestion, and: updateTimer)
     }
     
     /// Displays the score in the form of an alert
@@ -67,7 +66,7 @@ class GameViewController: UIViewController {
         
         // Tell the modal view controller stuff
         scoreViewController.score = game.correctAnswers
-        scoreViewController.numberOfQuestions = game.indicesOfQuestionsAsked.count
+        scoreViewController.numberOfQuestions = game.numberOfQuestionsAsked
         
         // Take a screenshot
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0)
@@ -86,7 +85,7 @@ class GameViewController: UIViewController {
         if game.isTimerRunning {
             questionField.text = game.currentQuestion.title
             game.currentOptions = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: game.currentOptions) as! [String]
-            timerButton.setImage(Resources.getImage(for: "pause"), for: .normal)
+            timerButton.setImage(Resources.getImage(for: "Pause"), for: .normal)
             
             for i in 0..<game.currentOptions.count {
                 (optionsView.subviews[i] as! UIButton).setTitle(game.currentOptions[i], for: .normal)
@@ -96,7 +95,7 @@ class GameViewController: UIViewController {
         } else {
             game.stopTimer()
             questionField.text = "I'll just be waiting."
-            timerButton.setImage(Resources.getImage(for: "play"), for: .normal)
+            timerButton.setImage(Resources.getImage(for: "Play"), for: .normal)
             
             for button in optionsView.subviews as! [UIButton] {
                 button.setTitle("...", for: .normal)
@@ -112,9 +111,9 @@ class GameViewController: UIViewController {
         let isAnswerCorrect = sender?.currentTitle == game.currentQuestion.answer
         if isAnswerCorrect { game.correctAnswers += 1 }
         
-        displayModal(for: modalDuration, if: isAnswerCorrect, and: sender != nil)
-        DispatchQueue.main.asyncAfter(deadline: .now() + modalDuration) {
-            if self.game.indicesOfQuestionsAsked.count < self.game.questions.count {
+        displayModal(if: isAnswerCorrect, and: sender != nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            if self.game.numberOfQuestionsAsked < self.game.questions.count {
                 self.displayQuestion()
             } else {
                 self.displayScore()
@@ -128,7 +127,7 @@ class GameViewController: UIViewController {
     
     /// Set a random gradient as the background
     func setGradientBackground() {
-        let gradientLayer = Resources.getRandomGradient()
+        let gradientLayer = Resources.getGradient()
         
         // Size the gradient layer to the bounds of the superview
         gradientLayer.frame = view.bounds
@@ -153,12 +152,11 @@ class GameViewController: UIViewController {
     }
     
     /// Displays the modal view controller and shows the outcome of the question answered
-    func displayModal(for duration: Double, if isCorrect: Bool, and isGiven: Bool) {
+    func displayModal(if isCorrect: Bool, and isGiven: Bool) {
         // Instantiate the modal view controller
         let modalViewController = storyboard?.instantiateViewController(withIdentifier: "Modal") as! ModalViewController
         
         // Tell the modal view controller stuff
-        modalViewController.duration = duration
         modalViewController.isAnswerCorrect = isCorrect
         modalViewController.isAnswerGiven = isGiven
         

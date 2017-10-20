@@ -30,7 +30,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="PauseIcon"/>
+                                <state key="normal" image="Pause"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
@@ -345,6 +345,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PauseIcon" width="36" height="36"/>
+        <image name="Pause" width="36" height="36"/>
     </resources>
 </document>

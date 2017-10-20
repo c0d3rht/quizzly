@@ -11,13 +11,16 @@ class Game {
     var currentQuestion: Question!
     var currentOptions: [String]!
     
-    static let secondsPerQuestion = 15.0
-    var secondsLeft = 0.0
+    var secondsLeft: Double
+    let secondsPerQuestion = 15.0
     
     var timer = Timer()
     var isTimerRunning = true
     
     var indicesOfQuestionsAsked: [Int] = []
+    var numberOfQuestionsAsked: Int {
+        return indicesOfQuestionsAsked.count
+    }
     
     let questions = [
         Question(title: "This was the only US President to serve more than two consecutive terms.",
@@ -43,7 +46,7 @@ class Game {
     ]
     
     init() {
-        secondsLeft = Game.secondsPerQuestion
+        secondsLeft = secondsPerQuestion
     }
     
     /// Returns a random question that hasn't been asked yet
@@ -56,7 +59,7 @@ class Game {
         
         indicesOfQuestionsAsked.append(randomIndex)
         currentQuestion = questions[randomIndex]
-        currentOptions = currentQuestion.getOptions() 
+        currentOptions = currentQuestion.getOptions()
     }
     
     /// Starts the timer
