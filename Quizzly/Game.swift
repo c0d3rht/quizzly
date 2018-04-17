@@ -1,79 +1,123 @@
-//
-//  Game.swift
-//  Quizzly
-//
-
+import Foundation
 import GameKit
 
+struct Generator {
+    static func randomNumber(upperBound: Int) -> Int {
+        return GKRandomSource.sharedRandom().nextInt(upperBound: upperBound)
+    }
+    
+    static func shuffledArray(from array: [Any]) -> [Any] {
+        return GKRandomSource.sharedRandom().arrayByShufflingObjects(in: array)
+    }
+}
+
+class Question: Equatable {
+    let title: String
+    let options: [String]
+    let answer: String
+    
+    init(title: String, options: [String], answer: String) {
+        self.title = title
+        self.options = options
+        self.answer = answer
+    }
+    
+    func scrambledOptions() -> [String] {
+        var options = Generator.shuffledArray(from: self.options) as! [String]
+        
+        if Generator.randomNumber(upperBound: 2) == 0 {
+            var index: Int
+            var option: String
+            
+            repeat {
+                index = Generator.randomNumber(upperBound: options.count)
+                option = options.remove(at: index)
+                
+                if option == answer {
+                    options.append(option)
+                }
+            } while option == answer && options.count == self.options.count
+        }
+        
+        return options
+    }
+    
+    static func ==(lhs: Question, rhs: Question) -> Bool {
+        return lhs.title == rhs.title
+    }
+    
+}
+
+enum AnswerType {
+    case correct, incorrect, none
+}
+
 class Game {
+    let questions: [Question]
+    var questionsAsked: [Question] = []
+    
+    var currentQuestion: Question?
+    var currentOptions: [String]?
     var correctAnswers = 0
     
-    var currentQuestion: Question!
-    var currentOptions: [String]!
-    
+    var timer = Timer()
     var secondsLeft: Double
     let secondsPerQuestion = 15.0
     
-    var timer = Timer()
-    var isTimerRunning = true
-    
-    var indicesOfQuestionsAsked: [Int] = []
-    var numberOfQuestionsAsked: Int {
-        return indicesOfQuestionsAsked.count
+    var isFinished: Bool {
+        return questionsAsked.count == questions.count
     }
     
-    let questions = [
-        Question(title: "This was the only US President to serve more than two consecutive terms.",
-                 ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"], 2),
-        Question(title: "Which of the following countries has the most residents?",
-                 ["Nigeria", "Russia", "Iran", "Vietnam"], 1),
-        Question(title: "In what year was the United Nations founded?",
-                 ["1918", "1919", "1945", "1954"], 3),
-        Question(title: "The Titanic departed from the United Kingdom, where was it supposed to arrive?",
-                 ["Paris", "Washington D.C.", "New York City", "Boston"], 3),
-        Question(title: "Which nation produces the most oil?",
-                 ["Iran", "Iraq", "Brazil", "Canada"], 4),
-        Question(title: "Which country has most recently won consecutive World Cups in Soccer?",
-                 ["Italy", "Brazil", "Argentina", "Spain"], 2),
-        Question(title: "Which of the following rivers is longest?",
-                 ["Yangtze", "Mississippi", "Congo", "Mekong"], 2),
-        Question(title: "Which city is the oldest?",
-                 ["Mexico City", "Cape Town", "San Juan", "Sydney"], 1),
-        Question(title: "Which country was the first to allow women to vote in national elections?",
-                 ["Poland", "United States", "Sweden", "Senegal"], 1),
-        Question(title: "Which of these countries won the most medals in the 2012 Summer Games?",
-                 ["France", "Germany", "Japan", "Great Britian"], 4)
-    ]
+    var action: (() -> Void)?
     
-    init() {
+    init(consistingOf questions: [Question]) {
+        self.questions = questions
         secondsLeft = secondsPerQuestion
     }
     
-    /// Returns a random question that hasn't been asked yet
-    func `continue`() {
-        var randomIndex: Int
+    func generateQuestion() -> Question {
+        var index: Int
         
         repeat {
-            randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: questions.count)
-        } while indicesOfQuestionsAsked.contains(randomIndex)
+            index = Generator.randomNumber(upperBound: questions.count)
+        } while questionsAsked.contains(questions[index])
         
-        indicesOfQuestionsAsked.append(randomIndex)
-        currentQuestion = questions[randomIndex]
-        currentOptions = currentQuestion.getOptions()
+        let question = questions[index]
+        questionsAsked.append(question)
+        
+        return question
     }
     
-    /// Starts the timer
-    func startTimer(for seconds: Double, and block: @escaping () -> ()) {
-        secondsLeft = seconds
+    func evaluate(_ answer: String) -> Bool {
+        return answer == currentQuestion?.answer
+    }
+    
+    func startTimer(for seconds: Double? = nil) {
+        secondsLeft = seconds ?? secondsPerQuestion
         
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {_ in
-            self.secondsLeft -= 1
-            block()
+            if self.secondsLeft > 0 {
+                self.secondsLeft -= 1
+                self.action?()
+            } else {
+                self.pause()
+            }
         })
     }
     
-    // Stops the timer
-    func stopTimer() {
+    func play() {
+        currentQuestion = generateQuestion()
+        currentOptions = currentQuestion?.scrambledOptions()
+        
+        startTimer()
+    }
+    
+    func pause() {
         timer.invalidate()
     }
+    
+    func doAction(_ block: (() -> Void)?) {
+        self.action = block
+    }
+    
 }
