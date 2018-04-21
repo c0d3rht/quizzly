@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOz-uo-YJY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDX-mB-Mn0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" layoutMarginsFollowReadableWidth="YES" text="15" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="HRP-Ny-jam">
@@ -121,23 +121,23 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="HRP-Ny-jam" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="35" id="719-Ue-PCN"/>
+                            <constraint firstItem="mDX-mB-Mn0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BiQ-Jo-nRC"/>
                             <constraint firstItem="RhX-bl-BIh" firstAttribute="top" secondItem="Ssx-br-v61" secondAttribute="bottom" constant="50" id="BjX-M3-Fza"/>
                             <constraint firstItem="HRP-Ny-jam" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="CFQ-4h-FUh"/>
-                            <constraint firstAttribute="bottom" secondItem="fOz-uo-YJY" secondAttribute="bottom" id="JrT-gq-ZW5"/>
                             <constraint firstItem="Ssx-br-v61" firstAttribute="top" secondItem="HRP-Ny-jam" secondAttribute="bottom" constant="35" id="Nei-zn-0WQ"/>
-                            <constraint firstItem="fOz-uo-YJY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Py6-fY-u2B"/>
-                            <constraint firstItem="fOz-uo-YJY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SXy-Wa-b2s"/>
-                            <constraint firstAttribute="trailing" secondItem="fOz-uo-YJY" secondAttribute="trailing" id="SfW-ee-bU9"/>
                             <constraint firstAttribute="trailing" secondItem="RhX-bl-BIh" secondAttribute="trailing" constant="30" id="VG8-qm-Xm5"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mDX-mB-Mn0" secondAttribute="bottom" id="XNp-Le-wuf"/>
                             <constraint firstItem="Ssx-br-v61" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="bQb-rM-dSP"/>
                             <constraint firstAttribute="trailing" secondItem="Ssx-br-v61" secondAttribute="trailing" constant="30" id="jbT-kM-oX7"/>
+                            <constraint firstAttribute="trailing" secondItem="mDX-mB-Mn0" secondAttribute="trailing" id="kjS-Dm-Dgd"/>
+                            <constraint firstItem="mDX-mB-Mn0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qcD-iP-Nqg"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HRP-Ny-jam" secondAttribute="trailing" constant="20" symbolic="YES" id="r8e-Fr-d38"/>
                             <constraint firstItem="RhX-bl-BIh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="rRF-l7-3E4"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RhX-bl-BIh" secondAttribute="bottom" constant="35" id="usH-i7-GDs"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backgroundView" destination="fOz-uo-YJY" id="PWf-3S-cM0"/>
+                        <outlet property="backgroundView" destination="mDX-mB-Mn0" id="eJx-Yc-aod"/>
                         <outlet property="optionStackView" destination="RhX-bl-BIh" id="AcB-Fx-gFa"/>
                         <outlet property="questionLabel" destination="Ssx-br-v61" id="WnS-RQ-SWA"/>
                         <outlet property="timerLabel" destination="HRP-Ny-jam" id="jEq-rc-VOX"/>
@@ -145,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-151.19999999999999" y="33.990147783251231"/>
+            <point key="canvasLocation" x="-151.19999999999999" y="33.733133433283363"/>
         </scene>
         <!--Modal Controller-->
         <scene sceneID="qbV-Bw-UCx">
@@ -220,9 +220,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4tZ-oM-W6C">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b39-BC-Ya5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qPY-XK-HB9">
@@ -295,18 +292,13 @@
                             </visualEffectView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="4tZ-oM-W6C" firstAttribute="leading" secondItem="34R-Bx-OsT" secondAttribute="leading" id="1SE-F7-sMy"/>
                             <constraint firstItem="b39-BC-Ya5" firstAttribute="leading" secondItem="34R-Bx-OsT" secondAttribute="leading" id="B1E-UB-Krc"/>
-                            <constraint firstAttribute="trailing" secondItem="4tZ-oM-W6C" secondAttribute="trailing" id="RIw-ja-I4Z"/>
                             <constraint firstAttribute="bottom" secondItem="b39-BC-Ya5" secondAttribute="bottom" id="S5I-3c-xB3"/>
                             <constraint firstAttribute="trailing" secondItem="b39-BC-Ya5" secondAttribute="trailing" id="YVr-Sl-ZXW"/>
-                            <constraint firstItem="J1F-zk-K3d" firstAttribute="top" secondItem="4tZ-oM-W6C" secondAttribute="bottom" id="uyQ-5p-RTR"/>
-                            <constraint firstItem="4tZ-oM-W6C" firstAttribute="top" secondItem="34R-Bx-OsT" secondAttribute="top" id="x2h-Bc-hZV"/>
                             <constraint firstItem="b39-BC-Ya5" firstAttribute="top" secondItem="34R-Bx-OsT" secondAttribute="top" id="zNC-2Q-W4D"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backgroundView" destination="4tZ-oM-W6C" id="TLL-6l-3z8"/>
                         <outlet property="continueButton" destination="5fc-kf-04R" id="b92-Ek-Lzj"/>
                         <outlet property="scoreLabel" destination="wqQ-qK-PBK" id="msu-PD-l1F"/>
                         <outlet property="totalQuestionsLabel" destination="Mwh-4N-Tbg" id="G3Q-4J-jWm"/>

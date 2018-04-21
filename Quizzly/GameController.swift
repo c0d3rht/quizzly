@@ -84,14 +84,8 @@ class GameController: UIViewController {
     
     func displayScore() {
         let scoreController = storyboard?.instantiateViewController(withIdentifier: "Score") as! ScoreController
-        
         scoreController.correctAnswers = game.correctAnswers
         scoreController.totalQuestions = game.questions.count
-        
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: false)
-        scoreController.backgroundImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
         
         present(scoreController, animated: true)
     }
